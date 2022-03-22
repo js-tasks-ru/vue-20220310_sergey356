@@ -36,36 +36,13 @@ const Root = defineComponent({
     return {
       emails,
 
-      // filteredEmails: [...emails], //filteredEmails является моделью фильтрованных данных
-      
-      isActive: true,
-      
       filter: {
         search: '',
       },
     };
   },
 
-  /*
-    watch: {
-      'filter.search'(){
-        this.filteredEmails = this.filterEmails();
-      },
-      deep: true,
-      handler() {
-        this.filteredEmails = this.filterEmails();
-      },
-    },
-
-    emails: {
-      deep: true,
-      handler() {
-        this.filteredEmails = this.filterEmails();
-      },
-    },
-  */
-  
-  computed: {  
+  computed: {
     filteredEmails() {
       return this.filterEmails();
     },
@@ -74,13 +51,13 @@ const Root = defineComponent({
     // здесь происходить фильтрация данных,
     // а в data() filteredEmails попадают фильтрованные данные
     filterEmails() {
-
-      const searchFilter = (email) => [email]
-      .join(' ')
-      .toLowerCase()
-      .includes(this.filter.search.toLowerCase());
-    
-      return this.emails.filter((email) => searchFilter(email));
+      return this.emails.map(email => {
+        if (this.filter.search.length > 0 && email.toLowerCase().includes(this.filter.search.toLowerCase())) {
+          return { text: email, active: true };
+        } else {
+          return { text: email, active: false };
+        }
+      });
     },
   },
 });

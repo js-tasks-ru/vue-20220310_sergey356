@@ -22,9 +22,8 @@
           />
         </div>
         <ul>
-          <li v-for="email in emails" v-bind:class="{marked: !isActive}">{{ email }}</li>   
-          <li v-for="email in emails" v-bind:class="{marked: isActive}">{{ email }}</li> <!--:class="marked:isActive"-->
-        </ul>
+          <li v-for="email in filteredEmails" v-bind:class="{marked: email.active}">{{ email.text }}</li>   
+          
       </div>
     </div>
 

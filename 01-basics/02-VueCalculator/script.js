@@ -7,26 +7,26 @@ const Root = defineComponent({
     return {
       digit1: 0,
       digit2: 0,
-      result: '',
+      operation: '+',
     };
   },
 
-  methods: {
-    sumValues() {
-      this.result = this.digit1 + this.digit2;
-      return this.result;
-    },
-    subtractValues() {
-      this.result = this.digit1 - this.digit2;
-      return this.result;
-    },
-    multiplyValues() {
-      this.result = this.digit1 * this.digit2;
-      return this.result;
-    },
-    divideValues() {
-      this.result = this.digit1 / this.digit2;
-      return this.result;
+  computed: {
+    result(){
+      switch (this.operation) {
+        case '+':
+          return this.digit1 + this.digit2;
+        break;
+        case '-':
+          return this.digit1 - this.digit2;
+        break;
+        case '*':
+          return this.digit1 * this.digit2;
+        break;
+        case '/':
+          return this.digit1 / this.digit2;
+        break;
+      }
     },
   },
 });
