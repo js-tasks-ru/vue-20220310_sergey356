@@ -1,13 +1,15 @@
 import { defineComponent } from './vendor/vue.esm-browser.js';
 import UiAlert from './UiAlert.js';
 import UiContainer from './UiContainer.js';
-
+import MeetupCover from '../03-MeetupCover/MeetupCover.js';
+///www/vue-20220310_sergey356/02-components/03-MeetupCover/MeetupCover.js
 export default defineComponent({
   name: 'MeetupView',
 
   components: {
     UiAlert,
     UiContainer,
+    MeetupCover,
   },
 
   props: {
@@ -19,7 +21,7 @@ export default defineComponent({
 
   template: `
     <div>
-      <!-- meetup cover-->
+      <meetup-cover :MeetupCover="MeetupCover" />
 
       <ui-container>
         <div class="meetup">
