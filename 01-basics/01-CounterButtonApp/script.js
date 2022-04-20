@@ -16,6 +16,6 @@ const Root = defineComponent({
     },
   },
 });
-
+//++
 const app = createApp(Root);
 const vm = app.mount('#app');
