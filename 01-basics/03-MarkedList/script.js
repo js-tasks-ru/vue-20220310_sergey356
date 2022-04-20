@@ -1,4 +1,4 @@
-// import { createApp } from './vendor/vue.esm-browser.js';
+import { createApp, defineComponent } from './vendor/vue.esm-browser.js';
 
 // From https://jsonplaceholder.typicode.com/comments
 const emails = [
@@ -29,4 +29,40 @@ const emails = [
   'Isaias_Kuhic@jarrett.net',
 ];
 
-// Требуется создать Vue приложение
+const Root = defineComponent({
+  name: 'Root',
+
+  data() {
+    return {
+      emails,
+
+      filter: {
+        search: '',
+      },
+    };
+  },
+
+  computed: {
+    filteredEmails() {
+      return this.filterEmails();
+    },
+  },
+  methods: {
+    // здесь происходить фильтрация данных,
+    // а в data() filteredEmails попадают фильтрованные данные
+    filterEmails() {
+      return this.emails.map(email => {
+        if (this.filter.search.length > 0 && email.toLowerCase().includes(this.filter.search.toLowerCase())) {
+          return { text: email, active: true };
+        } else {
+          return { text: email, active: false };
+        }
+      });
+    },
+  },
+});
+// следующий шаг в инпуте выправить получение и отправку данных
+const app = createApp(Root);
+const vm = app.mount('#app');
+
+window.vm = vm;
