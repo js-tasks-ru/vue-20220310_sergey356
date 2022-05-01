@@ -29,7 +29,7 @@ const app = createApp({
       meetupTitle: '',
     };
   },
-  //console.log(newValue);
+  
   watch: {
     meetupId(newValue) {
       fetchMeetupById(newValue)
@@ -37,9 +37,8 @@ const app = createApp({
           this.meetupTitle = res.title ;
         });
     },
-
   },
-
+  
 });
 
 // Требуется создать Vue приложение

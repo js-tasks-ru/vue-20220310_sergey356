@@ -4,10 +4,6 @@ import { agendaItemIcons, agendaItemDefaultTitles } from './meetupService.js';
 export default defineComponent({
   name: 'MeetupAgendaItem',
 
-  components: {
-    agendaItemIcons: agendaItemIcons,
-    agendaItemDefaultTitles: agendaItemDefaultTitles,
-  },
   props: {
     agendaItem: {
       type: Object,
@@ -15,27 +11,28 @@ export default defineComponent({
     },
   },
 
-  data(){
-    return {
-      type: '',
-    }
-  },
   computed: {
-    // getTitle: function() {
-    //  return this.agendaItem.title; // как вычислить agendaItem.title
-    // },
+    getTitle: function() {
+      if (this.agendaItem.title !== null) {
+        return this.agendaItem.title;
+      } else {
+        return agendaItemDefaultTitles[this.agendaItem.type];
+      } //return this.agendaItem.title ?? agendaItemDefaultTitles[this.agendaItem.type] ;
+    },
+    getIcon: function() {
+      return agendaItemIcons[this.agendaItem.type];
+    },
   },
 
-  //  { "agendaItem": null }   v-if="opening === 'cal-sm' "
   template: ` 
     <div class="agenda-item">
-      <div class="agenda-item__col">
-        <img src="/assets/icons/icon-key.svg" class="icon" alt="key" />
+      <div class="agenda-item__col"> 
+        <img :src="'/assets/icons/icon-' + getIcon + '.svg'" class="icon" alt="key" />
       </div>
       <div class="agenda-item__col">{{ agendaItem.startsAt }} - {{ agendaItem.endsAt }}</div>
       <div class="agenda-item__col">
-        <h3 class="agenda-item__title"> {{ agendaItem.title }} </h3>
-        <p  v-if="type === 'talk'" class="agenda-item__talk">
+        <h3 class="agenda-item__title"> {{ getTitle }} </h3>
+        <p  v-if="agendaItem.type === 'talk'" class="agenda-item__talk">
           <span> {{ agendaItem.speaker }} </span>
           <span class="agenda-item__dot"></span>
           <span class="agenda-item__lang"> {{ agendaItem.language }}</span>
